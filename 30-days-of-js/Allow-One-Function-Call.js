@@ -32,17 +32,16 @@
 
 // My Solution
 
-// P - Parameters
-// an array of one or multiple values of any data type
+var once = function(fn) {
+    let called = false 
+    return function(...args){
+        if(!called){
+            called = true
+            return fn(...args)
+        } else{
+            return undefined
+        }
+    }
+};
 
-// R - Return
-// the number of arguments passed to the function
-
-// E - Examples
-// Input: args = [{}, null, "3"]
-// Output: 3
-// Explanation: 
-// argumentsLength({}, null, "3"); // 3
-
-// P - Pseudocode
 
