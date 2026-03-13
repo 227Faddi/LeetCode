@@ -4,24 +4,27 @@ class Solution {
    * @return {boolean}
    */
 
-  // receive an arrat of integers
-  // return if a duplicate is present
-  // Input: nums = [1, 2, 3, 3]
-  // Output: true
-  // loop into the array an check each value,
-  // saved numbers in a set so they will be unique
-  // while looping if a number is already present then return true
-  // if the set is equal to the array then return true else false
+  // input: an array of int
+  // return true if a int is present more than once
+  // [1, 2, 3, 3]
+  // true // 3
+  // [1,2,3]
+  // false, no duplicate
+
+  // checking the array, and count the appearance of each number
+  // then check if the number was already counted, then return true
+  // if we check all the array and all the values are just counted once
+  // return false, because each value is unique
 
   hasDuplicate(nums) {
-    const list = new Set([]);
+    const counts = new Map();
 
-    for (let i = 0; i < nums.length; i++) {
-      if (list.has(nums[i])) {
+    for (const num of nums) {
+      if (counts.has(num)) {
         return true;
+      } else {
+        counts.set(num, 1);
       }
-
-      list.add(nums[i]);
     }
 
     return false;
