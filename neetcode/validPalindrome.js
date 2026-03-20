@@ -1,32 +1,38 @@
 class Solution {
-    /**
-     * @param {string} s
-     * @return {boolean}
-     */
-    // receive a string, case sensitive
-    // ignore non alpha numeric charts
-    // return a boolean
-    // always a string, from 1 to 1k char
+  /**
+   * @param {string} s
+   * @return {boolean}
+   */
 
-    isPalindrome(s) {
-        const cleanS = (s) => {
-            return s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "")
-        }
+  // a string always valid
+  // return a boolean indication if it's a palindrome
+  // a palindrome is a string that can be read forward and backward the same way
 
-        const clean = cleanS(s)
+  //"Was it a car or a cat I saw?"
+  //"wasitacaroracatisaw"
 
-        let l = 0
-        let r = clean.length - 1
+  // cleaning up the string, and remove every non alphanumeric chart
+  // check each side and see if each letters is equal to the other side
+  // if yes, then continue towards the middle of the string
+  // if not return false directly
+  // when we reach the middle and all the chart are equal
+  // we can just return true, since is a palindrome
 
-        while(l <= r){
-            if(clean[l] === clean[r]){
-                l++
-                r--
-            } else{
-                return false
-            }
-        }
+  isPalindrome(s) {
+    const cleanS = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
 
-        return true
+    let l = 0;
+    let r = cleanS.length - 1;
+
+    while (l < r) {
+      if (cleanS[l] == cleanS[r]) {
+        l++;
+        r--;
+      } else {
+        return false;
+      }
     }
+
+    return true;
+  }
 }
