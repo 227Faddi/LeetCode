@@ -5,30 +5,29 @@ class Solution {
    * @return {number[]}
    */
 
-  // receive an array of nums ordered in increasing order
-  // return an array of int, of the indices that add up to the target (starting from 1)
-  // numbers = [1,4,6,9,12], target = 10
-  // [1,4]
+  // receive an array of increasing int
+  // return an array with the indices from 1 of the nums that sum up to target
+  // numbers = [1,2,3,4] target = 3
+  // [1,2]
 
-  // create 2 pointers
-  // and loop into the array while checking if the total of the pointerts is bigger
-  // than target then decrease the right pointer else increase the left one
-  // until i find a match and return the indeces + 1
+  // one pointer on the r, and one on the l
 
   twoSum(numbers, target) {
     let l = 0;
     let r = numbers.length - 1;
 
-    while (numbers[l] + numbers[r] !== target) {
+    while (l < r) {
       const total = numbers[l] + numbers[r];
 
-      if (total > target) {
-        r--;
-      } else if (total < target) {
+      if (total === target) {
+        return [l + 1, r + 1];
+      }
+
+      if (total < target) {
         l++;
+      } else {
+        r--;
       }
     }
-
-    return [l + 1, r + 1];
   }
 }
