@@ -4,60 +4,47 @@ class Solution {
    * @return {number[][]}
    */
 
-  // array of int nums
-  // return an array containing all the possible uninque triplets
-  // that sum up to exactly 0
+  // receive an array of numbers
+  // find and return all the possible triplets that sum up to 0
+  // with no duplicates
 
   // [-1,0,1,2,-1,-4]
-  // [[-1,0,1], [-1,-1,2]]
+  // [[-1,-1,2],[-1,0,1]]
 
-  // create an empty array, where i'll store all the triplets after
-  // sort the array, in increasing order
+  // sort the array
   // [-4,-1,-1,0,1,2]
 
-  // create a loop where we check each num
+  // first loop to check each num
+  // if the num is equal to the previous one
+  // then skip it
 
-  // [-1, 0, 1] = 0 ? 1 > 0 =>
-
-  // create 2 pointers to find the 2 missing num to sum up to 0
-
-  // this will run until the 2 pointers meet each others
-
-  // every time we change pointer make sure it's different than the previous one
-
-  // if we didn't find any triplets that sum up to 0
-  // then go the next num
-
-  // valid [-1, -1, 2]
-  // valid [-1, 0, 1]
+  // for each num, try to find the couple that is missing to sum up to 0
+  // use a two pointer to check
 
   threeSum(nums) {
-    let result = [];
+    const result = [];
 
-    const sortedN = nums.sort((a, b) => a - b);
+    const sorted = nums.sort((a, b) => a - b);
 
-    for (let i = 0; i < sortedN.length; i++) {
-      if (i > 0 && sortedN[i] === sortedN[i - 1]) {
-        continue;
-      }
+    for (let i = 0; i < sorted.length; i++) {
+      if (i > 0 && sorted[i] === sorted[i - 1]) continue;
 
-      const num = sortedN[i];
+      const num = sorted[i];
 
       let l = i + 1;
-      let r = sortedN.length - 1;
+      let r = sorted.length - 1;
 
       while (l < r) {
-        const total = num + sortedN[l] + sortedN[r];
+        const total = num + sorted[l] + sorted[r];
 
         if (total > 0) {
           r--;
         } else if (total < 0) {
           l++;
         } else {
-          result.push([num, sortedN[l], sortedN[r]]);
+          result.push([num, sorted[l], sorted[r]]);
           l++;
-
-          while (l < r && sortedN[l] === sortedN[l - 1]) {
+          while (sorted[l] === sorted[l - 1] && l < r) {
             l++;
           }
         }
