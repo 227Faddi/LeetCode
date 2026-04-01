@@ -4,11 +4,17 @@ class Solution {
    * @return {number}
    */
 
-  // receive an array of int, not ordered
-  // an array representing the max area
+  // receive an array of int
+  // return the max area from all the possible containers
+  // height * width
+  // use two pointers
+  // check the area from the smallest height
+  // keep track of a max value
+  // change pointer in base of the smallest value
+  // return the max value after the l >= r
 
-  // [1,7,2,5,4,7,3,6]
-  //  36
+  // Input: height = [1,7,2,5,4,7,3,6]
+  // Output: 36
 
   maxArea(heights) {
     let max = 0;
@@ -17,9 +23,9 @@ class Solution {
     let r = heights.length - 1;
 
     while (l < r) {
-      const height = Math.min(heights[l], heights[r]);
+      const heigth = Math.min(heights[l], heights[r]);
       const width = r - l;
-      const area = width * height;
+      const area = width * heigth;
 
       if (area > max) {
         max = area;
