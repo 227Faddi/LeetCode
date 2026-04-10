@@ -4,6 +4,12 @@ class Solution {
    * @return {number}
    */
 
+  // [10,1,5,6,7,1]
+  // 6
+
+  // l
+  // r
+
   maxProfit(prices) {
     let max = 0;
 
