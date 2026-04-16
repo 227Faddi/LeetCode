@@ -5,25 +5,23 @@ class Solution {
    * @return {number}
    */
   characterReplacement(s, k) {
+    let subS = new Map();
     let max = 0;
-    let maxInt = 0;
-
-    let apperances = new Map();
 
     let l = 0;
     let r = 0;
 
     while (r < s.length) {
-      if (apperances.has(s[r])) {
-        apperances.set(s[r], apperances.get(s[r]) + 1);
+      if (subS.has(s[r])) {
+        subS.set(s[r], subS.get(s[r]) + 1);
       } else {
-        apperances.set(s[r], 1);
+        subS.set(s[r], 1);
       }
 
-      maxInt = Math.max(maxInt, apperances.get(s[r]));
+      const maxSub = Math.max(...subS.values());
 
-      while (r - l + 1 - maxInt > k) {
-        apperances.set(s[l], apperances.get(s[l]) - 1);
+      while (r - l + 1 - maxSub > k) {
+        subS.set(s[l], subS.get(s[l]) - 1);
         l++;
       }
 
