@@ -1,0 +1,71 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     constructor(val = 0, next = null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+
+class Solution {
+    /**
+     * @param {ListNode[]} lists
+     * @return {ListNode}
+     */
+
+    // receive a k number of linked list
+    // we can receive empty lists
+    // return a linked list ordered
+    // after merging all the k lists we receive
+
+    // Input: lists = [[1,2,4],[1,3,5],[3,6]]
+    // [1,1,3]
+
+    // Output: [1,1,2,3,3,4,5,6]
+
+
+    // create a dummy data to start the new list
+    // put all the values from the k lists in an array then sort the array
+    // and put all the values in a new list 
+
+    mergeKLists(lists) {
+        if(!lists || lists.length === 0) return null
+
+        while(lists.length > 1){
+            let merged = []
+            for(let i = 0; i < lists.length; i += 2){
+                let l1 = lists[i]
+                let l2 = lists[i + 1]
+
+                let result = this.mergeLists(l1, l2)
+                merged.push(result)
+            }
+            console.log(merged)
+
+            lists = merged
+        }
+
+        return lists[0]
+    }
+
+    mergeLists(list1, list2){
+        let dummy = new ListNode()
+        let tail = dummy
+
+        while(list1 && list2){
+            if(list1.val < list2.val){
+                tail.next = list1
+                list1 = list1.next
+            } else {
+                tail.next = list2
+                list2 = list2.next
+            }
+            tail = tail.next
+        }
+
+        tail.next = list1 ? list1 : list2
+
+        return dummy.next
+    }
+}
