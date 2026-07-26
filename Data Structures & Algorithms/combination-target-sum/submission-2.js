@@ -1,0 +1,34 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @param {number} target
+     * @returns {number[][]}
+     */
+
+    // use a recursive function to check all possible
+    // combinations and add the to a result arr if valid
+    // avoid duplicates and return the res array
+
+    combinationSum(nums, target) {
+        let res = []
+
+        function dfs(i, curr, total){
+            if(total === target){
+                res.push([...curr])
+                return
+            }
+
+            if(i >= nums.length || total > target) return
+
+            curr.push(nums[i])
+            dfs(i, curr, total + nums[i])
+            curr.pop()
+
+            dfs(i + 1, curr, total)
+        }
+
+        dfs(0, [], 0)
+
+        return res
+    }
+}
